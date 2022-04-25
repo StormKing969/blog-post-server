@@ -31,7 +31,7 @@ export const getSinglePost = async (req, res) => {
       postFound.forEach((element) => {
         if (postTitle === _.lowerCase(element.title)) {
           res.json(element);
-        } 
+        }
       });
     } else {
       console.error(err);
