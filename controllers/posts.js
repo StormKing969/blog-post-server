@@ -23,18 +23,30 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const getSinglePost = async (req, res) => {
-  const postTitle = _.lowerCase(req.params.topic);
+// export const getSinglePost = async (req, res) => {
+//   const postTitle = _.lowerCase(req.params.topic);
 
-  PostModel.find({}, (err, postFound) => {
-    if (!err) {
-      postFound.forEach((element) => {
-        if (postTitle === _.lowerCase(element.title)) {
-          res.json(element);
-        }
-      });
-    } else {
-      console.error(err);
-    }
-  });
+//   PostModel.find({}, (err, postFound) => {
+//     if (!err) {
+//       postFound.forEach((element) => {
+//         if (postTitle === _.lowerCase(element.title)) {
+//           res.json(element);
+//         }
+//       });
+//     } else {
+//       console.error(err);
+//     }
+//   });
+// };
+
+export const getSinglePost = async (req, res) => {
+  const postID = req.params.topicID;
+  // const postTitle = _.lowerCase(req.params.topic);
+
+  try {
+    const post = await PostModel.findById(postID);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
