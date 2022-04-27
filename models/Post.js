@@ -10,6 +10,7 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   creator: String,
+  featured: Boolean,
   createdAt: {
     type: Date,
     default: new Date(),
